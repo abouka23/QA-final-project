@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ToDo List</title>
+    </head>
+    <body style="text-align: center">
+        <h1>ToDo App</h1>
+        <span><a href="{{ url_for('create') }}">Create</a></span>
+        <span><a href="{{ url_for('read') }}">Read</a></span>
+        {% block todo %}{% endblock todo %}
+    </body>
+</html>

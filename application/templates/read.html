@@ -1,0 +1,27 @@
+{% extends 'main.html' %}
+{% block todo %}
+    <h3>All Character:</h3>
+    <p>
+    {% for character in characters %}
+        Name: {{ character.name }} <br>
+        Description: {{ character.description }} <br>
+        <!--The following line checks if the characters is completed or not-->
+        {% if character.completed == True %}
+        <!--The following line provides a text color based on if the task is complete or not-->
+        Status: <span style="color: green">Completed</span>
+        {% else %}
+        Status: <span style="color: red">Incompleted</span>
+        {% endif %}
+        <br>
+        <!--The following line provides a link to the url for the complete/incomplete function and also passes in the required argument 'name'-->
+        <!--Any of these links could be made in to buttons by using the <button> tag-->
+        <button><a href="{{ url_for('complete', name=character.name) }}">Complete</a></button>
+        <button><a href="{{ url_for('incomplete', name=character.name) }}">Incomplete</a></button> 
+        <br>
+        <span><a href="{{ url_for('update', name=character.name) }}">Update</a></span>
+        <span><a href="{{ url_for('delete', name=character.name) }}">Delete</a></span> 
+        <br>
+        <br>
+    {% endfor %}
+    </p>
+{% endblock todo %}
