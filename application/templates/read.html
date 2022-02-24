@@ -1,9 +1,12 @@
 {% extends 'main.html' %}
 {% block todo %}
-    <h3>All Character:</h3>
+    <h3>All Characters:</h3>
     <p>
     {% for character in characters %}
         Name: {{ character.name }} <br>
+        Age: {{ character.age }} <br>
+        Gender: {{ character.gender }} <br>
+        Date: {{ character.date }} <br>
         Description: {{ character.description }} <br>
         <!--The following line checks if the characters is completed or not-->
         {% if character.completed == True %}
