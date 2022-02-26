@@ -8,7 +8,7 @@ def create():
     createform = CreateForm()
 
     if createform.validate_on_submit():
-        character = Characters(name=createform.name.data,age=createform.age.data,gender=createform.gender.data,date=createform.date.data, description=createform.description.data)
+        character = Characters(name=createform.name.data,age=createform.age.data,race=createform.race.data,gender=createform.gender.data,date=createform.date.data, description=createform.description.data)
         db.session.add(character)
         db.session.commit()
         # Instead of rendering a template, the next line redirects the user to the endpoint for the function called 'read'.
@@ -37,6 +37,7 @@ def update(name):
         if updateform.validate_on_submit():
             character.name = updateform.name.data
             character.age = updateform.age.data
+            character.race = updateform.race.data
             character.gender = updateform.gender.data
             character.date = updateform.date.data
             character.description = updateform.description.data

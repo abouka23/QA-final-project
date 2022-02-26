@@ -5,6 +5,7 @@ from wtforms.validators import DataRequired, Length, ValidationError
 class CreateForm(FlaskForm):
     name = StringField('Name your Character', validators=[DataRequired(), Length(min=2,max=30)])
     age = IntegerField('Input your Age',validators=[DataRequired()])
+    race = SelectField('Select Race', choices = [('nord','NORD'),('slav','SLAV'),('orc','ORC'),('high elf','HIGH ELF'),('dark elf','DARK ELF')])
     gender = SelectField('Select Gender', choices = [('male','MALE'),('female','FEMALE')])
     date = DateField('Date of Creation',validators=[DataRequired()])
     description = StringField('Description', validators=[DataRequired(), Length(min=2,max=300)])
@@ -13,6 +14,7 @@ class CreateForm(FlaskForm):
 class UpdateForm(FlaskForm):
     name = StringField('Title', validators=[DataRequired(), Length(min=2,max=30)])
     age = IntegerField('Input your Age',validators=[DataRequired()])
+    race = SelectField('Select Race', choices = [('nord','NORD'),('slav','SLAV'),('orc','ORC'),('high elf','HIGH ELF'),('dark elf','DARK ELF')])
     gender = SelectField('Select Gender', choices = [('male','MALE'),('female','FEMALE')])
     date = DateField('Date of Creation',validators=[DataRequired()])
     description = StringField('Description', validators=[DataRequired(), Length(min=2,max=300)])
