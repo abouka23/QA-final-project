@@ -29,6 +29,10 @@ def update(name):
     # Prepopulate the form boxes with current values when they open the page.
     if request.method == 'GET':
         updateform.name.data = character.name
+        updateform.age.data = character.age
+        updateform.race.data = character.race
+        updateform.gender.data = character.gender
+        updateform.date.data = character.date
         updateform.description.data = character.description
         return render_template('update.html', form=updateform)
     
