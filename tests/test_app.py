@@ -57,15 +57,15 @@ class TestCRUD(TestBase):
 
     def test_update(self):
         response = self.client.post(
-            url_for('update', name='AdamB', age=23, race="nord",gender="male", date=date.today(), description="creating a new character"),
-            data=dict(name="updated name", age=18, race="updated race", gender="female", date=date.today() ,description="updated character", completed=True),
+            url_for('update', name='AdamB'),
+            data=dict(name="AdamC", age=18, race="orc", gender="female", date=date.today() ,description="updated character", completed=True),
             follow_redirects=True
         )
-        self.assertIn('updated name', str(response.data))
-        self.assertIn(18, int(response.data))
+        self.assertIn('AdamC', str(response.data))
+        self.assertIn('18', str(response.data))
         self.assertIn('female', str(response.data))
         self.assertIn('updated character', str(response.data))
-        self.assertIn('updated race', str(response.data))
+        self.assertIn('orc', str(response.data))
         
     
     def test_delete(self):
