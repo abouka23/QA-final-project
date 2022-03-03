@@ -19,21 +19,21 @@ class CreateCharacterForm(FlaskForm):
 
 
 
-class UpdateForm(FlaskForm):
-    name = StringField('Update your Character name', validators=[DataRequired(), Length(min=2,max=30)])
-    age = IntegerField('Change your Age',validators=[DataRequired()])
-    gender = SelectField('Change Gender', choices = [('male','MALE'),('female','FEMALE')])
-    #class_name = SelectField('Select your Class',choices=[('bezerker','BEZERKER'),('paladin','PALADIN'),('martial artist','MARTIAL ARTIST'),('assasin','ASSASIN'),('battle mage','BATTLE MAGE')])
-    date = DateField('Date of Creation',
-        default=date.today,validators=[DataRequired()])
-    description = StringField('Description', validators=[DataRequired(), Length(min=2,max=300)])
-    submit = SubmitField('Update Character')
+# class UpdateForm(FlaskForm):
+#     name = StringField('Update your Character name', validators=[DataRequired(), Length(min=2,max=30)])
+#     age = IntegerField('Change your Age',validators=[DataRequired()])
+#     gender = SelectField('Change Gender', choices = [('male','MALE'),('female','FEMALE')])
+#     #class_name = SelectField('Select your Class',choices=[('bezerker','BEZERKER'),('paladin','PALADIN'),('martial artist','MARTIAL ARTIST'),('assasin','ASSASIN'),('battle mage','BATTLE MAGE')])
+#     date = DateField('Date of Creation',
+#         default=date.today,validators=[DataRequired()])
+#     description = StringField('Description', validators=[DataRequired(), Length(min=2,max=300)])
+#     submit = SubmitField('Update Character')
 
 class RaceForm(FlaskForm):
     name = StringField("Input your Race name", validators=[DataRequired(), Length(min=2,max=30)])
     #race = SelectField('Select your race', choices=[('nord','NORD'),('slav','SLAV'),('orc','ORC'),('high elf','HIGH ELF'),('dark elf','DARK ELF')])
     submit = SubmitField('Submit Class Selection')
 
-# class RaceUpdateForm(FlaskForm):
-#     race = SelectField('Select your race', choices = [('nord','NORD'),('slav','SLAV'),('orc','ORC'),('high elf','HIGH ELF'),('dark elf','DARK ELF')])
-#     submit = SubmitField('Update Class Selection')
+class RaceUpdateForm(FlaskForm):
+    name = StringField("Input your Race name", validators=[DataRequired(), Length(min=2,max=30)])
+    submit = SubmitField('Update Class Selection')
