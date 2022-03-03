@@ -1,21 +1,15 @@
 {% extends 'main.html' %}
 {% block todo %}
     <h3>All Characters:</h3>
-    <p>
-    {% for character in characters %}
-        Name: {{ character.name }} <br>
-        Age: {{ character.age }} <br>
-        Race: {{ character.race}} <br>
-        Gender: {{ character.gender }} <br>
-        Date: {{ character.date }} <br>
-        Description: {{ character.description }} <br>
-       
-        <br>
-       
-        <span><a href="{{ url_for('update', name=character.name) }}">Update</a></span>
-        <span><a href="{{ url_for('delete', name=character.name) }}">Delete</a></span> 
+    <p>       
+    {% for race in races %}    
+        name: {{race.name}} <br>
+        
+        <span><a href="{{ url_for('update', name=race.name) }}">Update</a></span>
+        <span><a href="{{ url_for('delete', name=race.name) }}">Delete</a></span> 
         <br>
         <br>
     {% endfor %}
     </p>
+    
 {% endblock todo %}

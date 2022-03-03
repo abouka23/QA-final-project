@@ -24,16 +24,6 @@
         </div>
         {% endif %}
         <br>
-        {{ form.race.label }}
-        {{ form.race }}
-        {% if form.race.errors %}
-        <div class='error'>
-            {% for error in form.race.errors %}
-                <span>{{ error }}</span>
-            {% endfor %}
-        </div>
-        {% endif %}
-        <br>
         {{ form.gender.label }}
         {{ form.gender }}
         {% if form.gender.errors %}
@@ -59,6 +49,16 @@
         {% if form.description.errors %}
         <div class='error'>
             {% for error in form.description.errors %}
+                <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <br>
+        {{ form.character_race.label }}
+        {{ form.character_race}}
+        {% if form.character_race.errors %}
+        <div class='error'>
+            {% for error in form.character_race.errors %}
                 <span>{{ error }}</span>
             {% endfor %}
         </div>

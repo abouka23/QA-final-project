@@ -1,24 +1,46 @@
 from application import app, db
-from application.models import Characters
-from application.forms import CreateForm, UpdateForm
+from application.models import Characters,Race
+from application.forms import CreateCharacterForm, RaceForm, UpdateForm
 from flask import render_template, redirect, url_for, request
 
-@app.route('/create', methods=['GET', 'POST'])
+@app.route('/create-class', methods=['GET', 'POST'])
 def create():
-    createform = CreateForm()
+    createform = RaceForm()
 
     if createform.validate_on_submit():
-        character = Characters(name=createform.name.data,age=createform.age.data,race=createform.race.data,gender=createform.gender.data,date=createform.date.data, description=createform.description.data)
-        db.session.add(character)
+        races = Race(name=createform.name.data)
+        db.session.add(races)
         db.session.commit()
         return redirect(url_for('read'))
-    return render_template('create.html', form=createform)
+    return render_template('create_class.html', form=createform)
+
+@app.route('/create-character', methods=['GET', 'POST'])
+def create_character():
+    createform = CreateCharacterForm()
+    races = Race.query.all()
+    for race in races:
+        createform.character_race.choices.append((race.id,f"{race.name}"))
+        
+
+    if createform.validate_on_submit():
+        characters = Characters(name=createform.name.data,age=createform.age.data,gender=createform.gender.data,date=createform.date.data,
+        description=createform.description.data,race_id=createform.character_race.data)
+        #races = Races.query.all() 
+        db.session.add(characters)
+        db.session.commit()
+        return redirect(url_for('read'))
+    return render_template('create.html', form=createform)   
+
+    
+
+
 
 @app.route('/', methods=['GET'])
 @app.route('/read', methods=['GET'])
 def read():
-    characters = Characters.query.all()
-    return render_template('read.html', characters=characters)
+    #characters = Characters.query.all()
+    race = Race.query.all()
+    return render_template('read.html',  race=race)
 
 @app.route('/update/<name>', methods=['GET', 'POST'])
 def update(name):
@@ -29,7 +51,6 @@ def update(name):
     if request.method == 'GET':
         updateform.name.data = character.name
         updateform.age.data = character.age
-        updateform.race.data = character.race
         updateform.gender.data = character.gender
         updateform.date.data = character.date
         updateform.description.data = character.description
@@ -40,7 +61,6 @@ def update(name):
         if updateform.validate_on_submit():
             character.name = updateform.name.data
             character.age = updateform.age.data
-            character.race = updateform.race.data
             character.gender = updateform.gender.data
             character.date = updateform.date.data
             character.description = updateform.description.data

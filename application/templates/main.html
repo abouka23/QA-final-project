@@ -7,7 +7,8 @@
         <h1 style="background-color:orange;"></h1style>Character List</h1>
         <h2 style="background-color:orange;"></h2style> Welcome to fantasy character creation!</h2>
         <h3> You can input your characters name, input the age, select the class and gender</h3>
-        <span><a href="{{ url_for('create') }}">Create</a></span>
+        <span><a href="{{ url_for('create') }}">Create Race</a></span>
+        <span><a href="{{ url_for('create_character') }}">Create Character</a></span>
         <span><a href="{{ url_for('read') }}">Read</a></span>
         {% block todo %}{% endblock todo %}
     </body>
