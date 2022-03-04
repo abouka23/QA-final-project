@@ -1,11 +1,10 @@
-# Import the necessary modules
 from flask import url_for
 from flask_testing import TestCase
 from datetime import datetime, date
 # import the app's classes and objects
 from application import app, db
-from application.forms import CreateForm, UpdateForm
-from application.models import Characters
+from application.forms import CreateCharacterForm, RaceForm, RaceUpdateForm
+from application.models import Characters, Race
 from flask import render_template
 
 # Create the base class
@@ -14,7 +13,7 @@ class TestBase(TestCase):
 
         # Pass in testing configurations for the app. 
         # Here we use sqlite without a persistent database for our tests.
-        app.config.update(SQLALCHEMY_DATABASE_URI="sqlite:///",
+        app.config.update(SQLALCHEMY_DATABASE_URI="mysql+pymysql://root:uC!qUv3QqpEi5Lap@localhost:3306/racedb",
                 SECRET_KEY='TEST_SECRET_KEY',
                 DEBUG=True,
                 WTF_CSRF_ENABLED=False
@@ -26,9 +25,12 @@ class TestBase(TestCase):
         # Create table
         db.create_all()
         # Create test registree
-        sample1 = Characters(name="AdamB",age=23,race="nord",gender="male",date=date.today(),description="creating a new character")
+        #sample1 = Characters(name="AdamB",age=23,gender="male",date=date.today(),description="creating a new character")
+        race1 = Race(name="AdamB")
+        #character1 = Characters(name="name", age="23", gender="male", date=date.today(),description = "creating a new character") 
         # save users to database
-        db.session.add(sample1)
+        db.session.add(race1)
+        #db.session.add(character1)
         db.session.commit()
 
     # Will be called after every test
@@ -44,34 +46,40 @@ class TestCRUD(TestBase):
         response = self.client.get(url_for('read'))
         self.assertEqual(response.status_code, 200)
         self.assertIn('AdamB', str(response.data))
-        self.assertIn('creating a new character', str(response.data))
+        
+        # response = self.client.get(url_for('read'))
+        # self.assertEqual(response.status_code, 200)
+        # self.assertIn('AdamB', str(response.data))
+        # self.assertIn('23', str(response.data))
+        # self.assertIn('male', str(response.data))
+        # self.assertIn('creating a new character', str(response.data))
+        
     
     def test_create(self):
         response = self.client.post(
             url_for('create'),
-            data=dict(name="created name", age="23", race="orc", gender="male", date=date.today ,description="new created character"),
+            data=dict(name="created name"),
             follow_redirects=True
         )
         self.assertIn('created name', str(response.data))
-        self.assertIn('new created character', str(response.data))
+        
 
     def test_update(self):
         response = self.client.post(
-            url_for('update', name='AdamB'),
-            data=dict(name="AdamC", age=18, race="orc", gender="female", date=date.today() ,description="updated character", completed=True),
+            url_for('updaterace', name='AdamB'),
+            data=dict(name="AdamC"),
             follow_redirects=True
         )
         self.assertIn('AdamC', str(response.data))
-        self.assertIn('18', str(response.data))
-        self.assertIn('female', str(response.data))
-        self.assertIn('updated character', str(response.data))
-        self.assertIn('orc', str(response.data))
-        
+             
     
     def test_delete(self):
         response =self.client.post(
-            url_for('delete', name="AdamB", description="creating a new character"),
+            url_for('deleterace', name="AdamB"),
             follow_redirects=True
         )
+        
+        
         self.assertNotIn("AdamB", str(response.data))
-        self.assertNotIn("creating a new character", str(response.data))
+        
+        
