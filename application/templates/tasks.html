@@ -1,8 +1,0 @@
-{% extends 'main.html' %}
-{% block todo %}
-    <h3>All Characters:</h3>
-    <h4>{{ error }}</h4>
-    {% for character in characters %}
-        Name: {{ character.name }} Completed: {{ character.completed }}<br>
-    {% endfor %}
-{% endblock todo %}
