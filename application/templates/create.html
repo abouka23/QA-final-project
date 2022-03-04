@@ -34,6 +34,16 @@
         </div>
         {% endif %}
         <br>
+        {{ form.class_name.label }}
+        {{ form.class_name }}
+        {% if form.class_name.errors %}
+        <div class='error'>
+            {% for error in form.class_name.errors %}
+                <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <br>
         {{ form.date.label }}
         {{ form.date }}
         {% if form.date.errors %}
