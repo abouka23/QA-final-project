@@ -32,7 +32,7 @@ class CreateCharacterForm(FlaskForm):
 class RaceForm(FlaskForm):
     name = StringField("Input your Race name", validators=[DataRequired(), Length(min=2,max=30)])
     #race = SelectField('Select your race', choices=[('nord','NORD'),('slav','SLAV'),('orc','ORC'),('high elf','HIGH ELF'),('dark elf','DARK ELF')])
-    submit = SubmitField('Submit Class Selection')
+    submit = SubmitField('Submit Race Selection')
 
 class RaceUpdateForm(FlaskForm):
     name = StringField("Input your Race name", validators=[DataRequired(), Length(min=2,max=30)])

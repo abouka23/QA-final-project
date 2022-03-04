@@ -3,7 +3,7 @@ from application.models import Characters,Race
 from application.forms import CreateCharacterForm, RaceForm, RaceUpdateForm
 from flask import render_template, redirect, url_for, request
 
-@app.route('/create-class', methods=['GET', 'POST'])
+@app.route('/create-race', methods=['GET', 'POST'])
 def create():
     createform = RaceForm()
 
@@ -12,7 +12,7 @@ def create():
         db.session.add(races)
         db.session.commit()
         return redirect(url_for('read'))
-    return render_template('create_class.html', form=createform)
+    return render_template('create_race.html', form=createform)
 
 @app.route('/create-character', methods=['GET', 'POST'])
 def create_character():
