@@ -19,13 +19,12 @@ def create_character():
     createform = CreateCharacterForm()
     races = Race.query.all()
     for race in races:
-        createform.character_race.choices.append((race.id,f"{race.name}"))
+        createform.character_race.choices.append((race.id,f"{race.name}")) #For a single race in races, append the newly created race (using the race id and corresponding name) to the character race selection
         
 
     if createform.validate_on_submit():
-        characters = Characters(name=createform.name.data,age=createform.age.data,gender=createform.gender.data,date=createform.date.data,
+        characters = Characters(name=createform.name.data,age=createform.age.data,gender=createform.gender.data,class_name=createform.class_name.data,date=createform.date.data,
         description=createform.description.data,race_id=createform.character_race.data)
-        #races = Races.query.all() 
         db.session.add(characters)
         db.session.commit()
         return redirect(url_for('read'))
@@ -50,20 +49,12 @@ def updaterace(name):
     # Prepopulate the form boxes with values already submitted.
     if request.method == 'GET':
         updateform.name.data = race.name
-        # updateform.age.data = character.age
-        # updateform.gender.data = character.gender
-        # updateform.date.data = character.date
-        # updateform.description.data = character.description
         return render_template('update.html', form=updateform)
     
     # Update any fields if user needs to, returns to read page after changes made.
     else:
         if updateform.validate_on_submit():
             race.name = updateform.name.data
-            # character.age = updateform.age.data
-            # character.gender = updateform.gender.data
-            # character.date = updateform.date.data
-            # character.description = updateform.description.data
             db.session.commit()
             return redirect(url_for('read'))
     

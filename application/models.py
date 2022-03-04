@@ -7,6 +7,7 @@ class Characters(db.Model):
     name = db.Column(db.String(30), nullable=False)
     age = db.Column(db.Integer, nullable=False)
     gender = db.Column(db.String(30), nullable=False)
+    class_name = db.Column(db.String(30), nullable=False)
     date= db.Column(db.Date, nullable = False)
     description = db.Column(db.String(30),nullable=False)
     race_id = db.Column(db.Integer, db.ForeignKey('race.id'))
