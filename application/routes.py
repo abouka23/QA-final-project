@@ -3,6 +3,7 @@ from application.models import Characters,Race
 from application.forms import CreateCharacterForm, RaceForm, RaceUpdateForm
 from flask import render_template, redirect, url_for, request
 
+#App routes for both creating the race and character 
 @app.route('/create-race', methods=['GET', 'POST'])
 def create():
     createform = RaceForm()
@@ -14,12 +15,14 @@ def create():
         return redirect(url_for('read'))
     return render_template('create_race.html', form=createform)
 
+#For a single race in races, query all the races submitted in the database.
+# Append the newly created race (using the race id and corresponding name) to the character race selection
 @app.route('/create-character', methods=['GET', 'POST'])
 def create_character():
     createform = CreateCharacterForm()
     races = Race.query.all()
     for race in races:
-        createform.character_race.choices.append((race.id,f"{race.name}")) #For a single race in races, append the newly created race (using the race id and corresponding name) to the character race selection
+        createform.character_race.choices.append((race.id,f"{race.name}")) 
         
 
     if createform.validate_on_submit():

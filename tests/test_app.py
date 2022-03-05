@@ -12,7 +12,7 @@ class TestBase(TestCase):
     def create_app(self):
 
         # Pass in testing configurations for the app. 
-        # Here we use sqlite without a persistent database for our tests.
+        # We use our own database to produce testing
         app.config.update(SQLALCHEMY_DATABASE_URI="mysql+pymysql://root:uC!qUv3QqpEi5Lap@localhost:3306/racedb",
                 SECRET_KEY='TEST_SECRET_KEY',
                 DEBUG=True,
@@ -39,7 +39,7 @@ class TestBase(TestCase):
         db.session.remove()
         db.drop_all()
 
-# Write a test class to test Read functionality
+# Write a test class to test Read functionality for both the race and the characters
 class TestCRUD(TestBase):
     
     def test_read(self):
@@ -47,12 +47,6 @@ class TestCRUD(TestBase):
         self.assertEqual(response.status_code, 200)
         self.assertIn('race1', str(response.data))
         
-        # response = self.client.get(url_for('read'))
-        # self.assertEqual(response.status_code, 200)
-        # self.assertIn('AdamB', str(response.data))
-        # self.assertIn('23', str(response.data))
-        # self.assertIn('male', str(response.data))
-        # self.assertIn('creating a new character', str(response.data))
     def test_read_characters (self):
         response = self.client.get(url_for('read'))
         self.assertEqual(response.status_code, 200)
@@ -61,7 +55,7 @@ class TestCRUD(TestBase):
         self.assertIn('male', str(response.data))
         self.assertIn('bezerker',str(response.data))
         self.assertIn('creating a new character', str(response.data))   
-    
+    #testing the create functionality for both the characters and race
     def test_create(self):
         response = self.client.post(
             url_for('create'),
@@ -69,7 +63,7 @@ class TestCRUD(TestBase):
             follow_redirects=True
         )
         self.assertIn('created name', str(response.data))
-    
+   
     def test_create_character(self):
         response = self.client.post(
             url_for('create_character'),
