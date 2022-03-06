@@ -3,7 +3,8 @@ from application.models import Characters,Race
 from application.forms import CreateCharacterForm, RaceForm, RaceUpdateForm
 from flask import render_template, redirect, url_for, request
 
-#App routes for both creating the race and character 
+#App routes for both creating the race and character
+#GET and POST request because you're reading and submitting information
 @app.route('/create-race', methods=['GET', 'POST'])
 def create():
     createform = RaceForm()
@@ -74,4 +75,4 @@ def deleterace(name):
         race = Race.query.filter_by(name=name).first()
         db.session.delete(race)
         db.session.commit()
-        return redirect(url_for('read')) # returns to read page once character is deleted.
+        return redirect(url_for('read')) # returns to read page once race is deleted.

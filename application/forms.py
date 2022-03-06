@@ -16,12 +16,12 @@ class CreateCharacterForm(FlaskForm):
     character_race= SelectField('Select Race', choices=[],validators=[DataRequired()]) #The races that were created will be appended in the empty choices bracket.
     submit = SubmitField('Submit Character')
 
-# Creating a form for creating the race.
+# A form for creating the race.
 class RaceForm(FlaskForm):
     name = StringField("Input your Race name", validators=[DataRequired(), Length(min=2,max=30)])
     submit = SubmitField('Submit Race Selection')
 
-# Updating a race selection.
+# Updating a race name.
 class RaceUpdateForm(FlaskForm):
     name = StringField("Input your Race name", validators=[DataRequired(), Length(min=2,max=30)])
     submit = SubmitField('Update Race Selection')

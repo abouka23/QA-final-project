@@ -6,23 +6,31 @@ from application import app, db
 from application.forms import CreateCharacterForm, RaceForm, RaceUpdateForm
 from application.models import Characters, Race
 from flask import render_template
+import os
+from os import getenv
 
 # Create the base class
 class TestBase(TestCase):
     def create_app(self):
-
+        config_name = 'test'
         # Pass in testing configurations for the app. 
         # We use our own database to produce testing
-        app.config.update(SQLALCHEMY_DATABASE_URI="mysql+pymysql://root:uC!qUv3QqpEi5Lap@localhost:3306/racedb",
-                SECRET_KEY='TEST_SECRET_KEY',
-                DEBUG=True,
-                WTF_CSRF_ENABLED=False
-                )
+        app.config.update(SQLALCHEMY_DATABASE_URI=os.getenv('DATABASE_URI'),
+        SECRET_KEY='TEST_SECRET_KEY',
+        DEBUG=True,
+        WTF_CSRF_ENABLED=False
+        )
+        
+        
+    
+    
         return app
 
     # Will be called before every test
     def setUp(self):
         # Create table
+        db.session.commit()
+        db.drop_all()
         db.create_all()
         # Create test registers for both databases
         #sample1 = Characters(name="AdamB",age=23,gender="male",date=date.today(),description="creating a new character")
@@ -80,7 +88,7 @@ class TestCRUD(TestBase):
     def test_update(self):
         response = self.client.post(
             url_for('updaterace', name='race1'),
-            data=dict(name="race2"),
+            data=dict(name='race2'),
             follow_redirects=True
         )
         self.assertIn('race2', str(response.data))
