@@ -9,6 +9,7 @@ services:
       target: 5000
     environment: 
       DATABASE_URI: ${ADAM_DATABASEURI}
+      SECRET: ${MY_SECRET_KEY} 
   mysql_container:
     image: mysql:5.7
     deploy:
