@@ -15,7 +15,8 @@ class TestBase(TestCase):
         config_name = 'test'
         # Pass in testing configurations for the app. 
         # We use our own database to produce testing
-        app.config.update(SQLALCHEMY_DATABASE_URI=os.getenv('DATABASE_URI'),
+          
+        app.config.update(SQLALCHEMY_DATABASE_URI="sqlite:///",
         SECRET_KEY='TEST_SECRET_KEY',
         DEBUG=True,
         WTF_CSRF_ENABLED=False
