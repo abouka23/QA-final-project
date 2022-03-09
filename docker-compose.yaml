@@ -8,7 +8,7 @@ services:
     - published: 5000
       target: 5000
     environment: 
-      DATABASE_URI: "mysql+pymysql://root:password123@mysql_container:3306/racedb"
+      DATABASE_URI: ${ADAM_DATABASEURI}
   mysql_container:
     image: mysql:5.7
     deploy:
@@ -17,8 +17,8 @@ services:
     - published: 3306
       target: 3306
     environment:
-     MYSQL_ROOT_PASSWORD: password123 
-     MYSQL_DATABASE: racedb
+     MYSQL_ROOT_PASSWORD: ${MY_PASSWORD} 
+     MYSQL_DATABASE: ${MY_DATABASE_NAME}
     volumes: 
     - type: volume
       source: raceapp
@@ -27,7 +27,7 @@ services:
     image: nginx:latest
     volumes:
     - type: bind
-      source: ./nginx/nginx.conf
+      source: nginx/nginx.conf
       target: /etc/nginx/nginx.conf
     deploy:
       replicas: 1
