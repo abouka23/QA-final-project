@@ -31,7 +31,7 @@ Create a character option:
 
 •	Jenkins CI/CD pipeline to automate pytest, creating a docker image then pushing to docker hub and connecting to another Virtual Machine via SSH to deploy the application in a Docker Swarm
 
-Entity Relationship Diagram:
+## Entity Relationship Diagram:
 ![image](https://user-images.githubusercontent.com/97620482/157718248-89664b89-a54b-404e-baf7-dcf53725f1be.png)
 
 This entity diagram shows the relationship between race and character. A single race can have many characters and a single character can only have one race. So, therefore, this is a one-to-many relationship.
