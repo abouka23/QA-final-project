@@ -21,7 +21,7 @@ Create a character option:
 •	Race (From ‘create a race’)
 
 ### Additional requirements include to:
-•	Document progress using Jira with Epics and story points
+•	Document progress using Jira and show any changes, as the project progresses 
 
 •	Full CRUD functionality of the website.
 
