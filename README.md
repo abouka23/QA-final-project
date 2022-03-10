@@ -27,7 +27,7 @@ Additional requirements include to:
 
 •	Comments on the flask application (‘#’) to aid the user in explaining the functionality of some code.
 
-•	Jenkins CI/CD pipeline to automate pytest, creating a docker image and 
+•	Jenkins CI/CD pipeline to automate pytest, creating a docker image then pushing to docker hub and connecting to another Virtual Machine via SSH to deploy the application in a Docker Swarm
 
 Entity Relationship Diagram:
 ![image](https://user-images.githubusercontent.com/97620482/157718248-89664b89-a54b-404e-baf7-dcf53725f1be.png)
